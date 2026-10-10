@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bitewise | Area and Dish Comparison</title>
+  <meta name="description" content="Bitewise - Compare local menus and find dishes that appear less often.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <nav class="role-nav">
+    <a class="brand" href="/">Bitewise</a>
+    <span>Bitewise local menu dashboard</span>
+    <div>
+      <a href="/">Overview</a>
+      <a class="active" href="/analysis">Neighborhoods</a>
+      <a href="/simulator">Menu Simulator</a>
+      <a href="/guide">How It Works</a>
+      <a href="/logout">Log out</a>
+    </div>
+  </nav>
+
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">MARKET &amp; MENU ANALYSIS</p>
+      <h1>Neighborhood Competition &amp; <span>Food Opportunities</span></h1>
+      <p class="intro">
+        Analyze delivery neighborhoods across Bangalore and Delhi to see how crowded they are, what dishes are most common, and where customers want more food choices.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="/simulator">Test in Menu Simulator &rarr;</a>
+        <a class="button secondary-button" href="/">Back to Map Overview</a>
+      </div>
+    </div>
+    <div class="status-chip"><span></span> Active Delivery Areas</div>
+  </header>
+
+  <main>
+    <!-- KPI Summary Grid -->
+    <section class="stats-grid four-col">
+      <article class="stat-card">
+        <span>DELIVERY AREAS</span>
+        <strong id="kpi-areas">{{ areas|length }}</strong>
+        <small>Markets included in the data</small>
+      </article>
+      <article class="stat-card">
+        <span>TRACKED KITCHENS</span>
+        <strong id="kpi-kitchens">200</strong>
+        <small>Restaurants included in the data</small>
+      </article>
+      <article class="stat-card">
+        <span>UNIQUE DISHES</span>
+        <strong id="kpi-dishes">{{ dishes|length }}</strong>
+        <small>Cataloged menu offerings</small>
+      </article>
+      <article class="stat-card accent">
+        <span>LESS-COMMON DISHES</span>
+        <strong id="kpi-whitespace">{{ dishes|selectattr("status", "in", ["Market Whitespace", "High-Demand Gap"])|list|length }}</strong>
+        <small>Dishes found on fewer local menus</small>
+      </article>
+    </section>
+
+    <!-- Filter Control Bar -->
+    <section class="panel filter-panel" style="margin-top: 16px; padding: 14px 18px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <label for="city-filter" style="font-weight: 600; font-size: 12px; color: var(--text-muted);">Select City:</label>
+            <select id="city-filter" style="width: auto; padding: 6px 10px; font-size: 12px;">
+              <option value="all">All Cities</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Delhi">Delhi</option>
+            </select>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div id="category-pills" class="pill-group">
+            <button class="filter-pill active" data-cat="all">All Categories</button>
+            <button class="filter-pill" data-cat="Main Course">Main Course</button>
+            <button class="filter-pill" data-cat="Appetizer">Appetizers</button>
+            <button class="filter-pill" data-cat="Snack">Snacks</button>
+            <button class="filter-pill" data-cat="Dessert">Desserts</button>
+            <button class="filter-pill" data-cat="Beverage">Beverages</button>
+            <button class="filter-pill" data-cat="community">Customer Polls</button>
+          </div>
+        </div>
+
+        <div style="max-width: 280px; width: 100%;">
+          <input
+            id="dish-search"
+            type="text"
+            placeholder="Search dish (e.g. Biryani)..."
+            style="padding: 6px 10px; font-size: 12px;"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Content Grid -->
+    <section class="content-grid" style="margin-top: 16px;">
+      <!-- Left Panel: Area-Wise Coverage -->
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">AREA COMPARISON</p>
+              <h2>Menu similarity and restaurant count</h2>
+          </div>
+          <span class="panel-copy" style="font-size: 12px;" id="area-count-label">{{ areas|length }} delivery areas</span>
+        </div>
+        <p class="panel-copy" style="font-size: 12px; margin-top: 4px;">
+          A higher percentage means menus in that area are more alike. The count shows restaurants and other food places found in the available data.
+        </p>
+
+        <div id="areas-container" class="area-list" style="margin-top: 12px; max-height: 500px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+          {% for item in areas %}
+          <div class="area-item" onclick="filterDishesByArea('{{ item.city }}', '{{ item.area }}')" title="Click to inspect dishes in {{ item.area }}">
+            <div class="area-meta">
+              <strong>{{ item.area }}</strong>
+              <span class="city-tag">{{ item.city }}</span>
+              <small>{{ item.restaurants }} listed kitchens &middot; {{ item.osm_competitors }} local food places &middot; ₹{{ item.avg_price_inr|round|int }} avg dish price</small>
+              <div style="margin-top: 4px; display: flex; gap: 4px; flex-wrap: wrap;">
+                {% for td in item.top_dishes[:3] %}
+                <span style="font-size: 10px; background: var(--surface-subtle); border: 1px solid var(--border); padding: 1px 5px; border-radius: 3px; font-family: var(--font-mono);">{{ td.dish }} ({{ td.restaurants }})</span>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="area-badge-wrap">
+              <span class="sim-pct">{{ (item.avg_similarity * 100)|round|int }}%</span>
+              <span class="badge {{ item.badge or 'warning' }}">{{ item.status or 'Moderate Overlap' }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+
+      <!-- Right Panel: Dish-Wise Coverage -->
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">DISH COVERAGE</p>
+              <h2 id="dish-panel-title">Common and less-common dishes</h2>
+          </div>
+          <span class="panel-copy" style="font-size: 12px;" id="dish-count-label">{{ dishes|length }} dishes</span>
+        </div>
+        <p class="panel-copy" style="font-size: 12px; margin-top: 4px;">
+          Dishes found on fewer menus may be worth investigating. Click any card to test it in the menu checker.
+        </p>
+
+        <div id="dishes-container" class="gap-list" style="margin-top: 12px; max-height: 500px; overflow-y: auto;">
+          {% for item in dishes %}
+          <div class="gap-card clickable" onclick="location.href='/simulator?dish={{ item.dish|urlencode }}'" title="Click to test in simulator">
+            <div class="gap-header">
+              <strong>{{ item.dish }}</strong>
+              <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                {% if item.poll_badge %}
+                <span class="badge success" style="font-size: 10px;">{{ item.poll_badge }}</span>
+                {% endif %}
+                <span class="badge {{ item.badge or 'warning' }}">{{ item.status or 'Moderate Overlap' }}</span>
+              </div>
+            </div>
+            <div class="gap-details">
+              <span>{{ item.category or 'Main Course' }} &middot; ₹{{ item.avg_price_inr|round|int }} avg</span> &middot;
+              <span style="font-family: var(--font-mono); font-weight: 600;">{{ item.coverage_pct }}% presence ({{ item.restaurants }}/{{ item.total_restaurants }} kitchens)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <span class="gap-reason" style="margin: 0;">{{ 'Less-common dish' if item.status in ['Market Whitespace', 'High-Demand Gap'] else 'Common dish' }}</span>
+              <a href="/simulator?dish={{ item.dish|urlencode }}" class="button-link" style="margin: 0; font-size: 11px;">Check this dish &rarr;</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
+
+    <!-- How Bitewise measures this -->
+    <section class="panel" style="margin-top: 16px;">
+      <p class="eyebrow">HOW BITEWISE MEASURES THIS</p>
+      <h2 style="font-size: 16px; margin: 0 0 10px;">How the area and dish results are made</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+          <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">1. Menu similarity</strong>
+          Compares menus in the same area. A higher score means the menus share more similar dish names.
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+          <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">2. Restaurant count</strong>
+          Shows how many restaurants or food places are represented in the available area data.
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+          <strong style="color: var(--text-primary); display: block; margin-bottom: 2px;">3. Dish coverage</strong>
+          Highlights dishes that appear on fewer menus. This is a research lead, not proof of demand or success.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Bitewise &bull; Local menu information</span>
+    <span>Bangalore &amp; Delhi Delivery Markets</span>
+  </footer>
+
+  <script id="initial-areas" type="application/json">{{ areas_json|safe }}</script>
+  <script id="initial-dishes" type="application/json">{{ dishes_json|safe }}</script>
+  <script src="{{ url_for('static', filename='analysis.js') }}"></script>
+</body>
+</html>

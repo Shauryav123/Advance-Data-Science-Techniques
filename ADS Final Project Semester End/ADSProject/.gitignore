@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+instance/*.sqlite3
+artifacts/*.pkl
+!artifacts/menu_similarity.pkl
+.ipynb_checkpoints/
+*.csv
+!data/raw/cleaned_zomato_menus.csv
+!data/processed/menu_listings.csv
+!data/processed/menu_items.csv
+!data/processed/restaurant_locations.csv
+!data/processed/restaurant_performance.csv

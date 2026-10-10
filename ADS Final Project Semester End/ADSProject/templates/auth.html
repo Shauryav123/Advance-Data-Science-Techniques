@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }} | Bitewise</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header class="role-nav">
+    <a class="brand" href="/">Bitewise</a>
+    <span>Bitewise local menu dashboard</span>
+    <div>
+      <a href="{{ url_for('login') }}" class="{{ 'active' if not signup else '' }}">Sign In</a>
+      <a href="{{ url_for('signup') }}" class="{{ 'active' if signup else '' }}">Create Account</a>
+    </div>
+  </header>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <p class="eyebrow">WELCOME TO BITEWISE</p>
+        <h1>{{ 'Sign in to Bitewise' if not signup else 'Create Your Bitewise Account' }}</h1>
+        <p style="font-size: 13px; color: var(--text-secondary); margin: 4px 0 0;">
+          {{ 'Enter your credentials to access neighborhood competition and test new menu ideas.' if not signup else 'Create an account to explore neighborhood competition and test new menu ideas.' }}
+        </p>
+      </div>
+
+      <nav class="auth-tabs" aria-label="Authentication modes">
+        <a href="{{ url_for('login') }}" class="auth-tab {{ 'active' if not signup else '' }}">Sign In</a>
+        <a href="{{ url_for('signup') }}" class="auth-tab {{ 'active' if signup else '' }}">Register</a>
+      </nav>
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="auth-alert" role="alert">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <span>{{ messages[0] }}</span>
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <form method="post" class="auth-form" autocomplete="on">
+        <div class="auth-field">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            autofocus
+            autocomplete="username"
+            placeholder="e.g. analyst_user"
+          />
+        </div>
+
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            minlength="6"
+            autocomplete="{{ 'new-password' if signup else 'current-password' }}"
+            placeholder="Minimum 6 characters"
+          />
+        </div>
+
+        {% if signup %}
+        <div class="auth-field">
+          <label for="role">Role Profile</label>
+          <select id="role" name="role">
+            <option value="analyst" selected>Data Analyst</option>
+            <option value="owner">Kitchen Owner / Manager</option>
+            <option value="customer">Customer / Food Explorer</option>
+          </select>
+          <small>Choose your profile to see relevant recommendations and tools.</small>
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 8px;">
+          <button class="button" type="submit" style="width: 100%;">
+            {{ 'Create Account &amp; Access' if signup else 'Sign In to Bitewise' }}
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-footer">
+        {% if signup %}
+        Already have credentials? <a href="{{ url_for('login') }}">Sign in here</a>
+        {% else %}
+        Need access? <a href="{{ url_for('signup') }}">Create new account</a>
+        {% endif %}
+      </div>
+
+      {% if not signup %}
+      <div class="auth-demo-box">
+        <strong>Demo Accounts</strong>
+        <div style="margin-bottom: 6px; font-size: 11px;">You can register any new username or use demo credentials:</div>
+        <div class="auth-demo-grid">
+          <div class="auth-demo-tag" onclick="document.getElementById('username').value='shauryav'; document.getElementById('password').value='password123';">
+            Role: <strong>Kitchen Owner</strong>
+          </div>
+          <div class="auth-demo-tag" onclick="document.getElementById('username').value='shauryavenkta31@gmail.com'; document.getElementById('password').value='password123';">
+            Role: <strong>Data Analyst</strong>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <footer>
+    <span>Bitewise &bull; Local menu information</span>
+    <span>Bangalore &amp; Delhi Delivery Markets</span>
+  </footer>
+</body>
+</html>

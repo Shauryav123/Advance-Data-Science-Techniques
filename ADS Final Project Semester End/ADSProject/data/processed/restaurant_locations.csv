@@ -1,0 +1,26 @@
+city,location,latitude,longitude,display_name,geocode_source,geocode_confidence
+Bangalore,Indiranagar,12.9732913,77.6404672,"Indiranagar, Jogpalya, Bengaluru Central City Corporation, Bengaluru, Bangalore East, Bengaluru Urban, Karnataka, 560008, India",OpenStreetMap Nominatim,neighbourhood
+Bangalore,Jayanagar,12.9292731,77.5824229,"Jayanagar, Tilak Nagara, Bengaluru South City Corporation, Bengaluru, Bangalore South, Bengaluru Urban, Karnataka, 560011, India",OpenStreetMap Nominatim,neighbourhood
+Bangalore,Koramangala,12.9357366,77.624081,"Koramangala, Sri Lakshmi Devi Ward, Bengaluru South City Corporation, Bengaluru, Bangalore South, Bengaluru Urban, Karnataka, 560095, India",OpenStreetMap Nominatim,neighbourhood
+Bangalore,Mg Road,12.9755264,77.6067902,"Mahatma Gandhi Road, Shanthala Nagar, Ashokanagar, Bengaluru Central City Corporation, Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, 560001, India",OpenStreetMap Nominatim,neighbourhood
+Bangalore,Whitefield,12.9957428,77.7579489,"Whitefield (Kadugodi), SH35, Belathur, Bengaluru East City Corporation, Bengaluru, Bangalore East, Bengaluru Urban, Karnataka, 560067, India",OpenStreetMap Nominatim,neighbourhood
+Chennai,Adyar,13.00645,80.2577791,"Zone 13 Adyar, Chennai, Tamil Nadu, India",OpenStreetMap Nominatim,neighbourhood
+Chennai,Anna Nagar,13.088249,80.2073398,"Zone 8 Anna Nagar, Chennai, Tamil Nadu, India",OpenStreetMap Nominatim,neighbourhood
+Chennai,Nungambakkam,13.0620626,80.240487,"Nungambakkam, Zone 9 Teynampet, Chennai, Tamil Nadu, 600034, India",OpenStreetMap Nominatim,neighbourhood
+Chennai,T. Nagar,13.0378289,80.231836,"Thiyagaraya Nagar, Zone 10 Kodambakkam, Chennai, Tamil Nadu, 600017, India",OpenStreetMap Nominatim,neighbourhood
+Chennai,Velachery,12.9801655,80.2228506,"Velachery, Chennai, Tamil Nadu, 600042, India",OpenStreetMap Nominatim,neighbourhood
+Mumbai,Andheri,19.1196976,72.8464205,"Andheri, Masjid Galli, Gaondevi Dongri, Andheri West, K/W Ward, Mumbai Zone 3, Mumbai, Mumbai Suburban District, Maharashtra, 400069, India",OpenStreetMap Nominatim,neighbourhood
+Mumbai,Bandra,19.0549792,72.8402203,"Bandra, Gurunanak Marg (Turner Road), Lal Mati (Lal Mitti), Khar, H/W Ward, Mumbai Zone 3, Mumbai, Mumbai Suburban District, Maharashtra, 400050, India",OpenStreetMap Nominatim,neighbourhood
+Mumbai,Goregaon,19.1648688,72.8495492,"Goregaon, Station Road, Jawahar Nagar, Goregaon East, P/S Ward, Mumbai Zone 4, Mumbai, Mumbai Suburban District, Maharashtra, 400062, India",OpenStreetMap Nominatim,neighbourhood
+Mumbai,Juhu,19.1070215,72.8275275,"Juhu, K/W Ward, Mumbai Zone 3, Mumbai, Mumbai Suburban District, Maharashtra, 400058, India",OpenStreetMap Nominatim,neighbourhood
+Mumbai,Powai,19.1187195,72.9073476,"Powai, S Ward, Mumbai Zone 6, Mumbai, Mumbai Suburban District, Maharashtra, 400076, India",OpenStreetMap Nominatim,neighbourhood
+New Delhi,Connaught Place,28.6317695,77.2193804,"Connaught Place, New Delhi, Delhi, 110001, India",OpenStreetMap Nominatim,neighbourhood
+New Delhi,Hauz Khas,28.5475971,77.2013448,"Haveli Hauz Khas, P5, Aurobindo Marg, Hauz Khas Enclave, Hauz Khas, South, New Delhi, South Delhi, Delhi, 110016, India",OpenStreetMap Nominatim,neighbourhood
+New Delhi,Karol Bagh,28.6539198,77.191078,"State Bank of India, Deshbandhu Gupta Road, 57, Karol Bagh, New Delhi, Central Delhi, Delhi, 110060, India",OpenStreetMap Nominatim,neighbourhood
+New Delhi,Rajouri Garden,28.6484714,77.1204602,"HOD Rajouri Garden - House Of Diagnostics, A19 Vishal Enclave, Shivaji Marg, Tilak Nagar Industrial Area, Mayapuri, West, New Delhi, West Delhi, Delhi, 110027, India",OpenStreetMap Nominatim,neighbourhood
+New Delhi,Saket,28.5234897,77.209631,"Green Field School, Saket Road, Press Enclave, Saket, South, New Delhi, South Delhi, Delhi, 110017, India",OpenStreetMap Nominatim,neighbourhood
+Pune,Aundh,18.5618834,73.8101957,"Aundh, Pune, Pune City Subdistrict, Pune District, Maharashtra, 411027, India",OpenStreetMap Nominatim,neighbourhood
+Pune,Baner,18.5589937,73.7845232,"Baner, Pune, Pune City Subdistrict, Pune District, Maharashtra, 411001, India",OpenStreetMap Nominatim,neighbourhood
+Pune,Hinjawadi,18.5927532,73.7382151,"Hinjawadi, Mulshi Subdistrict, Pune District, Maharashtra, 411057, India",OpenStreetMap Nominatim,neighbourhood
+Pune,Kothrud,18.5072618,73.8056676,"Kothrud, Karve Nagar, Pune, Pune City Subdistrict, Pune District, Maharashtra, 411051, India",OpenStreetMap Nominatim,neighbourhood
+Pune,Viman Nagar,18.5703877,73.9133336,"Viman Nagar, Pune, Pune City Subdistrict, Pune District, Maharashtra, 411001, India",OpenStreetMap Nominatim,neighbourhood

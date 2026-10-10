@@ -1,0 +1,14 @@
+{
+  "total_restaurants": 4199,
+  "total_trade_areas": 25,
+  "intra_locality_comparisons": 355272,
+  "high_redundancy_pairs_ge_70pct": 1701,
+  "ml_feature_columns": [
+    "item_count",
+    "avg_price_inr",
+    "osm_competitors",
+    "district_population",
+    "whitespace_score"
+  ],
+  "status": "VALIDATED_CLEAN"
+}

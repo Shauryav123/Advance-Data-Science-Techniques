@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bitewise | How It Works</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <nav class="role-nav">
+    <a class="brand" href="/">Bitewise</a>
+    <span>Bitewise local menu dashboard</span>
+    <div>
+      <a href="/">Overview</a>
+      <a href="/analysis">Neighborhoods</a>
+      <a href="/simulator">Menu Simulator</a>
+      <a class="active" href="/guide">How It Works</a>
+      <a href="/logout">Log out</a>
+    </div>
+  </nav>
+
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">SYSTEM GUIDE</p>
+      <h1>How Bitewise <span>Works</span></h1>
+      <p class="intro">
+      Learn how Bitewise compares local menus, highlights repeated dishes, and helps you investigate less-common dishes before you launch.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="/simulator">Test a Menu Concept &rarr;</a>
+        <a class="button secondary-button" href="/">Back to Overview</a>
+      </div>
+    </div>
+    <div class="status-chip"><span></span> System Live &amp; Ready</div>
+  </header>
+
+  <main>
+    <!-- KPI Summary Grid -->
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>CORE SYSTEM</span>
+        <strong>4 simple steps</strong>
+        <small>Compare menus, find less-common dishes, test a menu, review estimates</small>
+      </article>
+      <article class="stat-card accent">
+        <span>COVERAGE</span>
+        <strong>25 Neighborhoods</strong>
+        <small>Bangalore &amp; Delhi delivery markets</small>
+      </article>
+      <article class="stat-card">
+        <span>PREDICTIONS</span>
+        <strong>Estimated results</strong>
+        <small>Shows separate restaurant-level order and revenue estimates</small>
+      </article>
+    </section>
+
+    <!-- 4 Core Steps -->
+    <section class="content-grid" style="margin-top: 16px;">
+      <article class="panel">
+        <p class="eyebrow">STEP 01 &middot; COMPARE MENUS</p>
+        <h2>Finding restaurants with similar menus</h2>
+        <p class="panel-copy">
+          Compares dish names across menus in the same area. A higher similarity score means two menus share more similar dishes. It does not prove that the restaurants have the same owner.
+        </p>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">STEP 02 &middot; FIND LESS-COMMON DISHES</p>
+        <h2>Finding dishes fewer restaurants offer</h2>
+        <p class="panel-copy">
+          Counts how often dishes appear in local menus. A dish with low coverage is a research lead; the data does not prove that customers want it.
+        </p>
+      </article>
+    </section>
+
+    <section class="content-grid" style="margin-top: 16px;">
+      <article class="panel">
+        <p class="eyebrow">STEP 03 &middot; TEST A MENU IDEA</p>
+        <h2>Checking a proposed menu</h2>
+        <p class="panel-copy">
+          Choose an area, enter one dish per line, and review how often those dishes already appear nearby. The system can also suggest spelling matches.
+        </p>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">STEP 04 &middot; REVIEW ESTIMATES</p>
+        <h2>Separate order and revenue estimates</h2>
+        <p class="panel-copy">
+          The analyst view compares estimated restaurant activity. These figures are benchmarks from limited data, not a promise of future orders or revenue.
+        </p>
+      </article>
+    </section>
+
+    <!-- How similarity is measured -->
+    <section class="panel" style="margin-top: 16px;">
+      <p class="eyebrow">HOW SIMILARITY IS MEASURED</p>
+      <h2 style="font-size: 16px; margin: 0 0 10px;">Menu similarity score</h2>
+      <div class="formula">
+        <span>Shared dish names and menu words</span>
+        <b>&rarr;</b>
+        <span>Similarity score (0% to 100%)</span>
+      </div>
+      <p class="panel-copy" style="font-size: 12px; margin-top: 10px;">
+        Results are estimates based on the available menu, area, and restaurant data. They are not guaranteed demand.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Bitewise &bull; Local menu information</span>
+    <span>Bangalore &amp; Delhi Delivery Markets</span>
+  </footer>
+</body>
+</html>
